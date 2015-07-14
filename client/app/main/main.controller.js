@@ -8,17 +8,6 @@ angular.module('leanmeaneatsApp')
       $scope.awesomeThings = awesomeThings;
     });
 
-    $scope.search = function() {
-      $http.get('/api/foods', { headers: {things:$scope.searchTerm} }).success(function(foodstuffs) {
-        console.log("it worked?");
-        $scope.foodstuffs = foodstuffs;
-      })
-      .error(function(data, status) {
-        console.log("it failed");
-      });
-      $scope.searchTerm = '';
-    };
-
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;

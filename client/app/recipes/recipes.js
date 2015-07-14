@@ -7,5 +7,10 @@ angular.module('leanmeaneatsApp')
         url: '/recipes',
         templateUrl: 'app/recipes/recipes.html',
         controller: 'RecipesCtrl'
+      })
+      .state('createRecipes', {
+        url: '/recipes/new',
+        templateUrl: 'app/recipes/newrecipe.html',
+        controller: 'RecipesCtrl'
       });
   });

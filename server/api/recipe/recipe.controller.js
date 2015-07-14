@@ -26,6 +26,8 @@ exports.create = function(req, res) {
     if(err) { return handleError(res, err); }
     return res.json(201, recipe);
   });
+  //find user
+  //take req.user_id and user.recipe.push(recipe_id)
 };
 
 // Updates an existing recipe in the DB.
