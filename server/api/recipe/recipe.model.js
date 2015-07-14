@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var RecipeSchema = new Schema({
   name: String,
   instructions: String,
-  ingredients: Array
+  ingredients: Array,
+  _user: { type: String, ref: 'Person' }
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema);

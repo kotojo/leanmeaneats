@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('leanmeaneatsApp')
-  .controller('RecipesCtrl', function ($scope, $http, $modal, $location) {
+  .controller('RecipesCtrl', function ($scope, $http, $modal, $location, Auth, Recipe) {
 
     var ingredients = [];
+
+    var user = Auth.getCurrentUser();
 
     $scope.search = function() {
       $http.get('/api/foods', { headers: {things:$scope.searchTerm} }).success(function(foodstuffs) {
@@ -29,27 +31,18 @@ angular.module('leanmeaneatsApp')
       });
     };
 
-    $scope.saveRecipe = function(form) {
+    $scope.saveRecipe = function() {
 
-      if(form.$valid) {
-        Recipe.createRecipe({
-          name: $scope.recipeData.name,
-          instructions: $scope.recipeData.instructions,
-          ingredients: ingredients
-        })
-        .then( function() {
-          $location.path('/')
-        })
-        .catch( function(err) {
-          err = err.data;
-          $scope.errors = {};
+      Recipe.create({
+        name: $scope.recipeData.name,
+        instructions: $scope.recipeData.instructions,
+        ingredients: ingredients,
+        _user: user._id
+      })
+      .then( function() {
+        $location.path('/')
+      });
 
-          angular.forEach(err.errors, function(error, field) {
-            form[field].$setValidity('mongoose', false);
-            $scope.errors[field] = error.message;
-          });
-        });
-      }
     };
 
     $scope.open = function() {

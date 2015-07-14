@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Recipe = require('./recipe.model');
+var User = require('../user/user.model.js');
 
 // Get list of recipes
 exports.index = function(req, res) {
@@ -24,10 +25,18 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Recipe.create(req.body, function(err, recipe) {
     if(err) { return handleError(res, err); }
-    return res.json(201, recipe);
+
+    var userId = recipe._user;
+    var recipeId = recipe._id;
+
+    User.findById(userId, function (err, user) {
+      user.recipes.push(recipeId);
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+    });
   });
-  //find user
-  //take req.user_id and user.recipe.push(recipe_id)
 };
 
 // Updates an existing recipe in the DB.

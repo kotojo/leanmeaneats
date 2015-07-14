@@ -79,6 +79,20 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
+//Add new recipe to user
+exports.addRecipe = function(req, res, next) {
+  var userId = req._user;
+  var recipeId = req._id;
+
+  User.findById(userId, function (err, user) {
+    user.recipes.push(recipeId);
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 /**
  * Get my info
  */
