@@ -100,6 +100,8 @@ angular.module('leanmeaneatsApp')
 
     $scope.type="edit";
 
+    $scope.recipeData = {};
+
     Recipe.show($stateParams.id)
     .success(function(data) {
       $scope.recipe = data
@@ -179,6 +181,7 @@ angular.module('leanmeaneatsApp')
     }
 
     $scope.saveRecipe = function() {
+      console.log($scope.ingredients);
 
       Recipe.update($scope.recipe._id, {
         name: $scope.recipeData.name,
@@ -207,11 +210,20 @@ angular.module('leanmeaneatsApp')
       $modalInstance.close();
     }
   })
-  .controller('RecipesShowCtrl', function($scope, $stateParams, Recipe) {
+  .controller('RecipesShowCtrl', function($scope, $stateParams, $location, Recipe) {
 
     Recipe.show($stateParams.id)
     .success(function(data) {
       $scope.recipe = data
     });
 
-  })
+    $scope.deleteRecipe = function(id) {
+      //pass in card id as param
+      Recipe.delete(id)
+        .then(function() {
+          //redirect back to home page
+          $location.path('/me');
+        });
+    };
+
+  });

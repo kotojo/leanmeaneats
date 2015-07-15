@@ -15,5 +15,9 @@ angular.module('leanmeaneatsApp')
     return $http.put('api/recipes/'+ id, recipeData);
   };
 
+  recipeFactory.delete = function(id) {
+    return $http.delete('api/recipes/' + id);
+  };
+
   return recipeFactory;
 });

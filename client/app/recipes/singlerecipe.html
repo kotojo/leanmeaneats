@@ -39,7 +39,7 @@
                  ng-model="recipe.instructions" required>
         </div>
         <div class="form-group">
-          <label>Foods</label>
+          <label ng-hide="ingredients.length < 1">Foods</label>
           <ul ng-repeat="food in ingredients">
             <li>{{food.name}}</br>
             Quantity: <input type="number"
