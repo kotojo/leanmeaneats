@@ -10,8 +10,13 @@ angular.module('leanmeaneatsApp')
       })
       .state('createRecipes', {
         url: '/recipes/new',
-        templateUrl: 'app/recipes/newrecipe.html',
+        templateUrl: 'app/recipes/singlerecipe.html',
         controller: 'RecipesCtrl'
+      })
+      .state('editRecipes', {
+        url: '/recipes/edit/:id',
+        templateUrl: 'app/recipes/singleRecipe.html',
+        controller: 'RecipesEditCtrl'
       })
       .state('showRecipe', {
         url: '/recipes/:id',

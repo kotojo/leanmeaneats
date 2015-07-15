@@ -11,5 +11,9 @@ angular.module('leanmeaneatsApp')
     return $http.get('api/recipes/' + id);
   };
 
+  recipeFactory.update = function(id, recipeData) {
+    return $http.put('api/recipes/'+ id, recipeData);
+  };
+
   return recipeFactory;
 });
