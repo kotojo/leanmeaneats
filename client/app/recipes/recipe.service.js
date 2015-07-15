@@ -7,5 +7,9 @@ angular.module('leanmeaneatsApp')
     return $http.post('api/recipes', recipeData);
   };
 
+  recipeFactory.show = function(id) {
+    return $http.get('api/recipes/' + id);
+  };
+
   return recipeFactory;
 });

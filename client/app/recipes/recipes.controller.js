@@ -3,7 +3,7 @@
 angular.module('leanmeaneatsApp')
   .controller('RecipesCtrl', function ($scope, $http, $modal, $location, Auth, Recipe) {
 
-    var ingredients = [];
+    $scope.ingredients = [];
 
     var user = Auth.getCurrentUser();
 
@@ -26,8 +26,7 @@ angular.module('leanmeaneatsApp')
       $http.get('/api/foods/' + id).success(function(specFood) {
         $scope.specFood = specFood;
       }).then(function() {
-        ingredients.push($scope.specFood);
-        console.log(ingredients);
+        $scope.ingredients.push($scope.specFood);
       });
     };
 
@@ -36,11 +35,11 @@ angular.module('leanmeaneatsApp')
       Recipe.create({
         name: $scope.recipeData.name,
         instructions: $scope.recipeData.instructions,
-        ingredients: ingredients,
+        ingredients: $scope.ingredients,
         _user: user._id
       })
       .then( function() {
-        $location.path('/')
+        $location.path('/me')
       });
 
     };
@@ -60,9 +59,7 @@ angular.module('leanmeaneatsApp')
 
     }
 
-  });
-
-angular.module('leanmeaneatsApp')
+  })
   .controller('modalInstanceCtrl', function($scope, $modalInstance, food) {
 
     $scope.food = food;
@@ -70,4 +67,12 @@ angular.module('leanmeaneatsApp')
     $scope.ok = function() {
       $modalInstance.close();
     }
-  });
+  })
+  .controller('RecipesShowCtrl', function($scope, $stateParams, Recipe) {
+
+    Recipe.show($stateParams.id)
+    .success(function(data) {
+      $scope.recipe = data
+    });
+
+  })

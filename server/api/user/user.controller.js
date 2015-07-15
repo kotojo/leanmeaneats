@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var Recipe = require('../recipe/recipe.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -103,6 +104,11 @@ exports.me = function(req, res, next) {
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
+    return user;
+  })
+  .populate('recipes')
+  .exec(function(err, user) {
+    if (err) return handleError(err);
     res.json(user);
   });
 };

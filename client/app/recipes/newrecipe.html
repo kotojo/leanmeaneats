@@ -29,6 +29,12 @@
             <button type="submit" class="btn btn-success btn-large btn-block">Create Recipe</button>
           </div>
         </div>
+        <div class="form-group">
+          <label>Foods</label>
+          <ul ng-repeat="food in ingredients">
+            <li>{{food.name}}</li>
+          </ul>
+        </div>
       </form>
     </div>
   </div>
@@ -53,8 +59,8 @@
       <table class="table table-striped table-hover table-responsive table-bordered">
         <tr ng-repeat="food in foodstuffs">
           <td>{{food.name}}</td>
-          <td ng-click="modalSearch(food.ndbno)">Nutrient info</td>
-          <td ng-click="addFood(food.ndbno)">Add Food</td>
+          <td><a href="#" ng-click="modalSearch(food.ndbno)"> Nutrient info</a></td>
+          <td><a href="#" ng-click="addFood(food.ndbno)">Add Food</a></td>
         </tr>
       </table>
     </div>

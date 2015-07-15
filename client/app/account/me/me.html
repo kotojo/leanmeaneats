@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <h1>Lean Mean Eats</h1>
+      <a href="/recipes/new"><button class="btn btn-primary">New Recipe</button></a>
+    </div>
+    <div ng-repeat="recipe in me.recipes">
+      <div class="col-md-4 col-sm-6">
+        <a ng-href="/recipes/{{recipe._id}}"><h2>{{recipe.name}}</h2></a>
+        <p>{{recipe.instructions}}</p>
+      </div>
+    </div>
+  </div>
+</div>

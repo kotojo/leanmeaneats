@@ -12,5 +12,10 @@ angular.module('leanmeaneatsApp')
         url: '/recipes/new',
         templateUrl: 'app/recipes/newrecipe.html',
         controller: 'RecipesCtrl'
+      })
+      .state('showRecipe', {
+        url: '/recipes/:id',
+        templateUrl: 'app/recipes/showRecipe.html',
+        controller: 'RecipesShowCtrl'
       });
   });

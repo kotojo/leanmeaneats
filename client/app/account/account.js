@@ -18,5 +18,11 @@ angular.module('leanmeaneatsApp')
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
+      })
+      .state('me', {
+        url: '/me',
+        templateUrl: 'app/account/me/me.html',
+        controller: 'MeCtrl',
+        authenticate: true
       });
   });

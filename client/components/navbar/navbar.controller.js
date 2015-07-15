@@ -2,9 +2,10 @@
 
 angular.module('leanmeaneatsApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
+
     $scope.menu = [{
       'title': 'Home',
-      'link': '/'
+      'link': '/me'
     }];
 
     $scope.isCollapsed = true;
