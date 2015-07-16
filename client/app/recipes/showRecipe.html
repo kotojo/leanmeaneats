@@ -1,3 +1,12 @@
-<h1>Made it to the {{recipe.name}} recipe</h1>
-<a href="/recipes/edit/{{recipe._id}}"><button class="btn btn-primary">Edit Recipe</button></a>
-<button class="btn btn-danger" ng-click="deleteRecipe(recipe._id)">Delete</button>
+<div class="container">
+  <div class="row">
+    <h1>{{recipe.name}}</h1>
+    <a href="/recipes/edit/{{recipe._id}}"><button class="btn btn-primary">Edit Recipe</button></a>
+    <button class="btn btn-danger" ng-click="deleteRecipe(recipe._id)">Delete</button>
+    <p>{{recipe.instructions}}</p>
+    <div ng-repeat="food in recipe.ingredients">
+      <h4>{{food.name}}</h4>
+      <p>{{food.nutrients[0].qty}} {{food.nutrients[0].unit}}</p>
+    </div>
+  </div>
+</div>
