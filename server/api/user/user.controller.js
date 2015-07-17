@@ -108,7 +108,7 @@ exports.me = function(req, res, next) {
   })
   .populate('recipes')
   .exec(function(err, user) {
-    if (err) return handleError(err);
+    if (err) { return handleError(res, err); }
     res.json(user);
   });
 };
@@ -119,3 +119,7 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+function handleError(res, err) {
+  return res.send(500, err);
+}

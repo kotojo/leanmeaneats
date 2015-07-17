@@ -32,7 +32,7 @@ exports.create = function(req, res) {
     User.findById(userId, function (err, user) {
       user.recipes.push(recipeId);
       user.save(function(err) {
-        if (err) return validationError(res, err);
+        if (err) { return handleError(res, err); }
         res.send(200);
       });
     });

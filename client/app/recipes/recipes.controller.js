@@ -3,7 +3,7 @@
 angular.module('leanmeaneatsApp')
   .controller('RecipesCtrl', function ($scope, $http, $modal, $location, Auth, Recipe) {
 
-    $scope.type = "create";
+    $scope.type = 'create';
 
     $scope.recipeData = {};
 
@@ -14,10 +14,10 @@ angular.module('leanmeaneatsApp')
     //delete current ingredient before saving
     $scope.deleteIngredient = function(id) {
       for(var i=0; i<$scope.ingredients.length; i++){
-        if($scope.ingredients[i].ndbno == id){
+        if($scope.ingredients[i].ndbno === id){
           $scope.ingredients.splice(i, 1);
-        };
-      };
+        }
+      }
     };
 
     //using to change nutrient values when selecting amounts
@@ -25,29 +25,30 @@ angular.module('leanmeaneatsApp')
     //ex: nut=protein val=32 num=3 unit=oz There are 32 grams of protein in 3 oz of "food"
     $scope.changedValue=function(amount, serving, id) {
 
-      if(amount != undefined && serving != undefined){
+      if(amount !== undefined && serving !== undefined){
         for(var i=0; i<$scope.ingredients.length; i++) { //find the right ingredient
-          if($scope.ingredients[i].ndbno == id) {
+          if($scope.ingredients[i].ndbno === id) {
             for(var j=0; j<$scope.ingredients[i].nutrients.length; j++) { //set unit and qty
               $scope.ingredients[i].nutrients[j].unit = serving.label;
               $scope.ingredients[i].nutrients[j].qty = amount;
               for(var k=0; k<$scope.ingredients[i].nutrients[j].measures.length; k++) {
                 //grab nutrient value from specific measurement and apply it to main value
-                if($scope.ingredients[i].nutrients[j].measures[k].label == serving.label){
+                if($scope.ingredients[i].nutrients[j].measures[k].label === serving.label){
                   var value = $scope.ingredients[i].nutrients[j].measures[k].value / $scope.ingredients[i].nutrients[j].measures[k].qty;
                   $scope.ingredients[i].nutrients[j].value = value * amount;
                   console.log('changed a value');
-                };
-              };
-            };
-          };
-        };
-      };
+                }
+              }
+            }
+          }
+        }
+      }
     };
 
     $scope.search = function() {
       $http.get('/api/foods', { headers: {things:$scope.searchTerm} }).success(function(foodstuffs) {
-        foodstuffs == 'OK' ? $scope.foodstuffs = [{"name": "No results"}] : $scope.foodstuffs = foodstuffs;
+        //foodstuffs === 'OK' ? $scope.foodstuffs = [{'name': 'No results'}] : $scope.foodstuffs = foodstuffs;
+        $scope.foodstuffs = foodstuffs === 'OK' ? [{'name': 'No results'}] : foodstuffs;
       });
       $scope.searchTerm = '';
     };
@@ -58,7 +59,7 @@ angular.module('leanmeaneatsApp')
       }).then(function() {
         $scope.open();
       });
-    }
+    };
 
     $scope.addFood = function(id) {
       $http.get('/api/foods/' + id).success(function(specFood) {
@@ -77,14 +78,14 @@ angular.module('leanmeaneatsApp')
         _user: user._id
       })
       .then( function() {
-        $location.path('/me')
+        $location.path('/me');
       });
 
     };
 
     $scope.open = function() {
 
-      var modalInstance = $modal.open({
+      $modal.open({
         animation: true,
         templateUrl: 'myModalContent.html',
         controller: 'modalInstanceCtrl',
@@ -94,17 +95,17 @@ angular.module('leanmeaneatsApp')
           }
         }
       });
-    }
+    };
 
   }).controller('RecipesEditCtrl', function($scope, $http, $stateParams, $modal, $location, Auth, Recipe){
 
-    $scope.type="edit";
+    $scope.type='edit';
 
     $scope.recipeData = {};
 
     Recipe.show($stateParams.id)
     .success(function(data) {
-      $scope.recipe = data
+      $scope.recipe = data;
     }).then(function(){
       $scope.ingredients = $scope.recipe.ingredients;
       console.log($scope.ingredients[0]);
@@ -112,7 +113,8 @@ angular.module('leanmeaneatsApp')
 
     $scope.search = function() {
       $http.get('/api/foods', { headers: {things:$scope.searchTerm} }).success(function(foodstuffs) {
-        foodstuffs == 'OK' ? $scope.foodstuffs = [{"name": "No results"}] : $scope.foodstuffs = foodstuffs;
+        // foodstuffs === 'OK' ? $scope.foodstuffs = [{'name': 'No results'}] : $scope.foodstuffs = foodstuffs ;
+        $scope.foodstuffs = foodstuffs === 'OK' ? [{'name': 'No results'}] : foodstuffs;
       });
       $scope.searchTerm = '';
     };
@@ -128,10 +130,10 @@ angular.module('leanmeaneatsApp')
     //delete current ingredient before saving
     $scope.deleteIngredient = function(id) {
       for(var i=0; i<$scope.ingredients.length; i++){
-        if($scope.ingredients[i].ndbno == id){
+        if($scope.ingredients[i].ndbno === id){
           $scope.ingredients.splice(i, 1);
-        };
-      };
+        }
+      }
     };
 
     //using to change nutrient values when selecting amounts
@@ -139,23 +141,23 @@ angular.module('leanmeaneatsApp')
     //ex: nut=protein val=32 num=3 unit=oz There are 32 grams of protein in 3 oz of "food"
     $scope.changedValue=function(amount, serving, id) {
 
-      if(amount != undefined && serving != undefined){
+      if(amount !== undefined && serving !== undefined){
         for(var i=0; i<$scope.ingredients.length; i++) { //find the right ingredient
-          if($scope.ingredients[i].ndbno == id) {
+          if($scope.ingredients[i].ndbno === id) {
             for(var j=0; j<$scope.ingredients[i].nutrients.length; j++) { //set unit and qty
               $scope.ingredients[i].nutrients[j].unit = serving.label;
               $scope.ingredients[i].nutrients[j].qty = amount;
               for(var k=0; k<$scope.ingredients[i].nutrients[j].measures.length; k++) {
                 //grab nutrient value from specific measurement and apply it to main value
-                if($scope.ingredients[i].nutrients[j].measures[k].label == serving.label){
+                if($scope.ingredients[i].nutrients[j].measures[k].label === serving.label){
                   var value = $scope.ingredients[i].nutrients[j].measures[k].value / $scope.ingredients[i].nutrients[j].measures[k].qty;
                   $scope.ingredients[i].nutrients[j].value = value * amount;
-                };
-              };
-            };
-          };
-        };
-      };
+                }
+              }
+            }
+          }
+        }
+      }
     };
 
     $scope.modalSearch = function(id) {
@@ -164,11 +166,11 @@ angular.module('leanmeaneatsApp')
       }).then(function() {
         $scope.open();
       });
-    }
+    };
 
     $scope.open = function() {
 
-      var modalInstance = $modal.open({
+      $modal.open({
         animation: true,
         templateUrl: 'myModalContent.html',
         controller: 'modalInstanceCtrl',
@@ -178,7 +180,7 @@ angular.module('leanmeaneatsApp')
           }
         }
       });
-    }
+    };
 
     $scope.saveRecipe = function() {
       console.log($scope.ingredients);
@@ -189,14 +191,14 @@ angular.module('leanmeaneatsApp')
         ingredients: $scope.ingredients
       })
       .then( function() {
-        $location.path('/me')
+        $location.path('/me');
       });
 
     };
 
     $scope.getCurrentServing = function(food) {
       return _.find(food.nutrients[0].measures, function(measure){
-        return measure.label == food.nutrients[0].unit;
+        return measure.label === food.nutrients[0].unit;
       });
     };
 
@@ -208,17 +210,163 @@ angular.module('leanmeaneatsApp')
 
     $scope.ok = function() {
       $modalInstance.close();
-    }
+    };
   })
   .controller('RecipesShowCtrl', function($scope, $stateParams, $location, Recipe) {
 
+    var radarOptions = {
+
+      //Boolean - If we show the scale above the chart data
+      scaleOverlay : false,
+
+      //Boolean - If we want to override with a hard coded scale
+      scaleOverride : true,
+
+      //** Required if scaleOverride is true **
+      //Number - The number of steps in a hard coded scale
+      scaleSteps : 5,
+      //Number - The value jump in the hard coded scale
+      scaleStepWidth : 0.5,
+      //Number - The centre starting value
+      scaleStartValue : 0,
+
+      //Boolean - Whether to show lines for each scale point
+      scaleShowLine : true,
+
+      //String - Colour of the scale line
+      scaleLineColor : '#999',
+
+      //Number - Pixel width of the scale line
+      scaleLineWidth : 1,
+
+      //Boolean - Whether to show labels on the scale
+      scaleShowLabels : true,
+
+      //Interpolated JS string - can access value
+      scaleLabel : '<%=Number(value) + \'00%\'%>',
+
+      //String - Scale label font declaration for the scale label
+      scaleFontFamily : '\'Arial\'',
+
+      //Number - Scale label font size in pixels
+      scaleFontSize : 12,
+
+      //String - Scale label font weight style
+      scaleFontStyle : 'normal',
+
+      //String - Scale label font colour
+      scaleFontColor : '#666',
+
+      //Boolean - Show a backdrop to the scale label
+      scaleShowLabelBackdrop : true,
+
+      //String - The colour of the label backdrop
+      scaleBackdropColor : 'rgba(255,255,255,0.75)',
+
+      //Number - The backdrop padding above & below the label in pixels
+      scaleBackdropPaddingY : 2,
+
+      //Number - The backdrop padding to the side of the label in pixels
+      scaleBackdropPaddingX : 2,
+
+      //Boolean - Whether we show the angle lines out of the radar
+      angleShowLineOut : true,
+
+      //String - Colour of the angle line
+      angleLineColor : 'rgba(255,255,255,0.3)',
+
+      //Number - Pixel width of the angle line
+      angleLineWidth : 1,
+
+      //String - Point label font declaration
+      pointLabelFontFamily : '\'Arial\'',
+
+      //String - Point label font weight
+      pointLabelFontStyle : 'normal',
+
+      //Number - Point label font size in pixels
+      pointLabelFontSize : 12,
+
+      //String - Point label font colour
+      pointLabelFontColor : '#000000',
+
+      //Boolean - Whether to show a dot for each point
+      pointDot : true,
+
+      //Number - Radius of each point dot in pixels
+      pointDotRadius : 2,
+
+      //Number - Pixel width of point dot stroke
+      pointDotStrokeWidth : 1,
+
+      //Boolean - Whether to show a stroke for datasets
+      datasetStroke : true,
+
+      //Number - Pixel width of dataset stroke
+      datasetStrokeWidth : 1,
+
+      //Boolean - Whether to fill the dataset with a colour
+      datasetFill : true,
+
+      //Boolean - Whether to animate the chart
+      animation : true,
+
+      //Number - Number of animation steps
+      animationSteps : 60,
+
+      //String - Animation easing effect
+      animationEasing : 'easeOutQuart',
+
+      //Function - Fires when the animation is complete
+      onAnimationComplete : null
+
+    }
+
+    var nutrientArr = ['Total lipid (fat)', 'Fatty acids, total saturated', 'Cholesterol', 'Sodium, Na', 'Fiber, total dietary', 'Sugars, total', 'Protein', 'Vitamin A, IU', 'Vitamin B-6', 'Vitamin B-12', 'Vitamin C, total ascorbic acid', 'Vitamin D', 'Calcium, Ca', 'Iron, Fe','Potassium, K'];
+
+    $scope.a = {};
+
     Recipe.show($stateParams.id)
     .success(function(data) {
-      $scope.recipe = data
+      $scope.recipe = data;
+    })
+    .then(function() { //nutrient array has values that are equal to exact spelling of ingredient nutrient keys, use them to iterate over nutrients, grab the values, and added them to new key value that i can put into radarData.
+      _.forEach(nutrientArr, function(nutrient){
+        _.forEach($scope.recipe.ingredients, function(food){
+          var name = nutrient.replace(/[^a-z0-9.]+/ig, '');
+           if ($scope.a[name] === undefined){
+              $scope.a[name] = _.pluck(_.filter(food.nutrients, {'name': nutrient}), 'value')[0];
+           }
+           else {
+            $scope.a[name] += _.pluck(_.filter(food.nutrients, {'name': nutrient}), 'value')[0];
+           }
+        });
+      });
+    })
+    .then(function(){
+
+      // Radar Data
+      var radarData = {
+        labels : ['Total Fat','Saturated Fat','Cholesterol','Sodium','Fiber','Sugar','Protein','Vitamin A','Vitamin B6','Vitamin B12', 'Vitamin C','Vitamin D','Calcium','Iron','Potassium'],
+        datasets : [
+          {
+            fillColor : "rgba(0,0,220,0.5)",
+            strokeColor : "rgba(0,0,220,1)",
+            data : [($scope.a['Totallipidfat']/65),($scope.a['Fattyacidstotalsaturated']/20),($scope.a['Cholesterol']/300),($scope.a['SodiumNa']/4200),($scope.a['Fibertotaldietary']/25),($scope.a['Sugarstotal']/50),($scope.a['Protein']/50),($scope.a['VitaminAIU']/5000),($scope.a['VitaminB6']/2),($scope.a['VitaminB12']/6),($scope.a['VitaminCtotalascorbicacid']/60),($scope.a['VitaminD']/400),($scope.a['CalciumCa']/1000),($scope.a['IronFe']/180), ($scope.a['PotassiumK']/3500)]
+          }
+        ]
+      };
+
+      //Get the context of the Radar Chart canvas element we want to select
+      var ctx = document.getElementById('radarChart').getContext('2d');
+
+      // Create the Radar Chart
+      var myRadarChart = new Chart(ctx).Radar(radarData, radarOptions);
+
     });
 
     $scope.deleteRecipe = function(id) {
-      //pass in card id as param
+      //pass in recipe id as param
       Recipe.delete(id)
         .then(function() {
           //redirect back to home page

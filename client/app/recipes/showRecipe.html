@@ -1,5 +1,10 @@
 <div class="container">
   <div class="row">
+    <p>{{niacin}}</p>
+    <div class="chart-demo">
+      <h2 class="title">Filet Mignon</h2>
+      <canvas id="radarChart" width="640" height="400"></canvas>
+    </div>
     <h1>{{recipe.name}}</h1>
     <a href="/recipes/edit/{{recipe._id}}"><button class="btn btn-primary">Edit Recipe</button></a>
     <button class="btn btn-danger" ng-click="deleteRecipe(recipe._id)">Delete</button>

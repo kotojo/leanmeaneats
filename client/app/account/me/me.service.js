@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('leanmeaneatsApp')
 .factory('Me', function($http) {
 
