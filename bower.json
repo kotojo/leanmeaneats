@@ -15,7 +15,7 @@
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.10",
-    "ng-chartjs": "~0.0.5"
+    "tc-angular-chartjs": "~1.0.12"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",

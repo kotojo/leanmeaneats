@@ -226,7 +226,7 @@ angular.module('leanmeaneatsApp')
       //Number - The number of steps in a hard coded scale
       scaleSteps : 5,
       //Number - The value jump in the hard coded scale
-      scaleStepWidth : 0.5,
+      scaleStepWidth : .5,
       //Number - The centre starting value
       scaleStartValue : 0,
 
@@ -243,7 +243,7 @@ angular.module('leanmeaneatsApp')
       scaleShowLabels : true,
 
       //Interpolated JS string - can access value
-      scaleLabel : '<%=Number(value) + \'00%\'%>',
+      scaleLabel : '<%=Number(value)*100 + \'%\'%>',
 
       //String - Scale label font declaration for the scale label
       scaleFontFamily : '\'Arial\'',
@@ -361,9 +361,17 @@ angular.module('leanmeaneatsApp')
       var ctx = document.getElementById('radarChart').getContext('2d');
 
       // Create the Radar Chart
-      var myRadarChart = new Chart(ctx).Radar(radarData, radarOptions);
+      $scope.myRadarChart = new Chart(ctx).Radar(radarData, radarOptions);
 
     });
+
+    $scope.resize = function(amt){
+      if ($scope.myRadarChart.options.scaleStepWidth + amt <= 0){
+        return
+      }
+      $scope.myRadarChart.options.scaleStepWidth += amt;
+      $scope.myRadarChart.update();
+    };
 
     $scope.deleteRecipe = function(id) {
       //pass in recipe id as param
@@ -372,6 +380,114 @@ angular.module('leanmeaneatsApp')
           //redirect back to home page
           $location.path('/me');
         });
+    };
+
+  })
+  .controller('RecipesAllCtrl', function($scope){
+
+
+    $scope.resize = function(amt){
+
+      if ($scope.chart.options.scaleStepWidth + amt <= 0){
+        return
+      }
+      $scope.chart.options.scaleStepWidth = $scope.chart.options.scaleStepWidth + amt;
+      $scope.chart.update();
+    };
+
+    $scope.data = {
+      labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+      datasets: [
+        {
+          label: 'My First dataset',
+          fillColor: 'rgba(220,220,220,0.2)',
+          strokeColor: 'rgba(220,220,220,1)',
+          pointColor: 'rgba(220,220,220,1)',
+          pointStrokeColor: '#fff',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data: [65, 59, 90, 81, 56, 55, 40]
+        },
+        {
+          label: 'My Second dataset',
+          fillColor: 'rgba(151,187,205,0.2)',
+          strokeColor: 'rgba(151,187,205,1)',
+          pointColor: 'rgba(151,187,205,1)',
+          pointStrokeColor: '#fff',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(151,187,205,1)',
+          data: [28, 48, 40, 19, 96, 27, 100]
+        }
+      ]
+    };
+
+    // Chart.js Options
+    $scope.options =  {
+
+      //Boolean - If we want to override with a hard coded scale
+      scaleOverride : true,
+
+      //** Required if scaleOverride is true **
+      //Number - The number of steps in a hard coded scale
+      scaleSteps : 5,
+      //Number - The value jump in the hard coded scale
+      scaleStepWidth : 20,
+      //Number - The centre starting value
+      scaleStartValue : 0,
+
+      // Sets the chart to be responsive
+      responsive: true,
+
+      //Boolean - Whether to show lines for each scale point
+      scaleShowLine : true,
+
+      //Boolean - Whether we show the angle lines out of the radar
+      angleShowLineOut : true,
+
+      //Boolean - Whether to show labels on the scale
+      scaleShowLabels : true,
+
+      //String - Colour of the angle line
+      angleLineColor : 'rgba(0,0,0,.1)',
+
+      //Number - Pixel width of the angle line
+      angleLineWidth : 1,
+
+      //String - Point label font declaration
+      pointLabelFontFamily : '"Arial"',
+
+      //String - Point label font weight
+      pointLabelFontStyle : 'normal',
+
+      //Number - Point label font size in pixels
+      pointLabelFontSize : 10,
+
+      //String - Point label font colour
+      pointLabelFontColor : '#666',
+
+      //Boolean - Whether to show a dot for each point
+      pointDot : true,
+
+      //Number - Radius of each point dot in pixels
+      pointDotRadius : 3,
+
+      //Number - Pixel width of point dot stroke
+      pointDotStrokeWidth : 1,
+
+      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+      pointHitDetectionRadius : 20,
+
+      //Boolean - Whether to show a stroke for datasets
+      datasetStroke : true,
+
+      //Number - Pixel width of dataset stroke
+      datasetStrokeWidth : 2,
+
+      //Boolean - Whether to fill the dataset with a colour
+      datasetFill : true,
+
+      //String - A legend template
+      legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
     };
 
   });

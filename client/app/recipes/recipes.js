@@ -6,7 +6,7 @@ angular.module('leanmeaneatsApp')
       .state('recipes', {
         url: '/recipes',
         templateUrl: 'app/recipes/recipes.html',
-        controller: 'RecipesCtrl'
+        controller: 'RecipesAllCtrl'
       })
       .state('createRecipes', {
         url: '/recipes/new',
