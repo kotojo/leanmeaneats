@@ -1,3 +1,35 @@
 img {
     width: 100%;
 }
+
+.top-buffer {
+  margin-top: 20px;
+}
+
+.btn-long {
+  width: 15vw;
+  min-width: 100px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+}
+
+a {
+  font-family: 'Vollkorn', Georgia, Times, serif;
+}
+
+.middle {
+  padding-top: 5.625vw;
+}
+
+.center {
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+  color: #2648B5;
+}
+
+p {
+  font-family: 'Vollkorn', Georgia, Times, serif;
+}
