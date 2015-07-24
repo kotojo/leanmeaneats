@@ -226,7 +226,7 @@ angular.module('leanmeaneatsApp')
       //Number - The number of steps in a hard coded scale
       scaleSteps : 5,
       //Number - The value jump in the hard coded scale
-      scaleStepWidth : .5,
+      scaleStepWidth : 0.5,
       //Number - The centre starting value
       scaleStartValue : 0,
 
@@ -320,7 +320,7 @@ angular.module('leanmeaneatsApp')
       //Function - Fires when the animation is complete
       onAnimationComplete : null
 
-    }
+    };
 
     var nutrientArr = ['Total lipid (fat)', 'Fatty acids, total saturated', 'Cholesterol', 'Sodium, Na', 'Fiber, total dietary', 'Sugars, total', 'Protein', 'Vitamin A, IU', 'Vitamin B-6', 'Vitamin B-12', 'Vitamin C, total ascorbic acid', 'Vitamin D', 'Calcium, Ca', 'Iron, Fe','Potassium, K'];
 
@@ -350,8 +350,8 @@ angular.module('leanmeaneatsApp')
         labels : ['Total Fat','Saturated Fat','Cholesterol','Sodium','Fiber','Sugar','Protein','Vitamin A','Vitamin B6','Vitamin B12', 'Vitamin C','Vitamin D','Calcium','Iron','Potassium'],
         datasets : [
           {
-            fillColor : "rgba(0,0,220,0.5)",
-            strokeColor : "rgba(0,0,220,1)",
+            fillColor : 'rgba(0,0,220,0.5)',
+            strokeColor : 'rgba(0,0,220,1)',
             data : [($scope.a['Totallipidfat']/65),($scope.a['Fattyacidstotalsaturated']/20),($scope.a['Cholesterol']/300),($scope.a['SodiumNa']/4200),($scope.a['Fibertotaldietary']/25),($scope.a['Sugarstotal']/50),($scope.a['Protein']/50),($scope.a['VitaminAIU']/5000),($scope.a['VitaminB6']/2),($scope.a['VitaminB12']/6),($scope.a['VitaminCtotalascorbicacid']/60),($scope.a['VitaminD']/400),($scope.a['CalciumCa']/1000),($scope.a['IronFe']/180), ($scope.a['PotassiumK']/3500)]
           }
         ]
@@ -367,7 +367,7 @@ angular.module('leanmeaneatsApp')
 
     $scope.resize = function(amt){
       if ($scope.myRadarChart.options.scaleStepWidth + amt <= 0){
-        return
+        return;
       }
       $scope.myRadarChart.options.scaleStepWidth += amt;
       $scope.myRadarChart.update();
@@ -389,7 +389,7 @@ angular.module('leanmeaneatsApp')
     $scope.resize = function(amt){
 
       if ($scope.chart.options.scaleStepWidth + amt <= 0){
-        return
+        return;
       }
       $scope.chart.options.scaleStepWidth = $scope.chart.options.scaleStepWidth + amt;
       $scope.chart.update();

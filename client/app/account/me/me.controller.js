@@ -23,7 +23,7 @@ angular.module('leanmeaneatsApp')
       }
       else {
         _.remove(currentRecipes, function(thisRecipe){
-          return thisRecipe == _.find(currentRecipes, { '_id': recipe._id });
+          return thisRecipe === _.find(currentRecipes, { '_id': recipe._id });
         });
         $scope.curNutrients = {};
       }
@@ -85,7 +85,7 @@ angular.module('leanmeaneatsApp')
     $scope.resize = function(amt){
 
       if ($scope.chart.options.scaleStepWidth + amt <= 0){
-        return
+        return;
       }
       $scope.chart.options.scaleStepWidth = $scope.chart.options.scaleStepWidth + amt;
       $scope.chart.update();
@@ -101,7 +101,7 @@ angular.module('leanmeaneatsApp')
       //Number - The number of steps in a hard coded scale
       scaleSteps : 5,
       //Number - The value jump in the hard coded scale
-      scaleStepWidth : .2,
+      scaleStepWidth : 0.2,
       //Number - The centre starting value
       scaleStartValue : 0,
 
