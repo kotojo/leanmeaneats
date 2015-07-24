@@ -1,22 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1>Lean Mean Eats</h1>
+      <h1>{{me.name}}'s Recipes</h1>
       <div class="col-sm-8 col-sm-offset-2">
-        <canvas tc-chartjs chart-type="radar" chart-data="data" chart="chart" chart-options="options"></canvas>
+        <div>
+          <canvas tc-chartjs chart-type="radar" chart-data="data" chart="chart" chart-options="options"></canvas>
+        </div>
       </div>
       <div>
-        <button ng-click="resize(-.1)" class="btn btn-primary glyphicon glyphicon-plus"></button>
+        <button ng-click="resize(-.1)" class="btn btn-trans glyphicon glyphicon-plus"></button>
       </div>
       <div>
-        <button ng-click="resize(.1)" class="btn btn-primary glyphicon glyphicon-minus"></button>
+        <button ng-click="resize(.1)" class="btn btn-trans glyphicon glyphicon-minus"></button>
       </div>
     </div>
   </div>
   <div class="row">
-    <a class="col-xs-2 col-xs-offset-2" href="/recipes/new"><button class="btn btn-primary">New Recipe</button></a>
+    <a class="col-xs-2 col-xs-offset-2" href="/recipes/new"><button class="btn btn-custom">New Recipe</button></a>
     <input class="col-xs-4"  type="text" class="form-control" name="search" ng-model="searchText" placeholder="Search">
-    <button type="clear" class="btn btn-warning col-xs-offset-1" ng-click="searchText = ''">Reset</button>
+    <button type="clear" class="btn btn-inverse col-xs-offset-1" ng-click="searchText = ''">Reset</button>
   </div>
   <div class="row">
     <div ng-repeat="recipe in filteredRecipes = ( me.recipes | meFilter : searchText | orderBy: ['name', 'instructions'])">

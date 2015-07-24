@@ -7,6 +7,47 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 /**
  * App-wide Styles
  */
+body {
+  font-family: 'Vollkorn', Georgia, Times, serif;
+}
+
+
+//overriding bs stuff
+.form-control {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #ccc;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.btn-inverse {
+  background-color: #428bca;
+  color: #eee;
+}
+
+.btn-custom {
+  color: #428bca;
+  background-color: #ddd;
+  border-color: #eee;
+  border: 1px solid transparent;
+}
+
+input[type=text]:focus, textarea:focus {
+  box-shadow: none;
+  border-bottom: 1px solid #2648B5;
+}
+
+input[type=email]:focus, textarea:focus {
+  box-shadow: none;
+  border-bottom: 1px solid #2648B5;
+}
+
+input[type=password]:focus, textarea:focus {
+  box-shadow: none;
+  border-bottom: 1px solid #2648B5;
+}
 
 .browsehappy {
     margin: 0.2em 0;

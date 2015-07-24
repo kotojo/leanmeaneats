@@ -33,6 +33,9 @@
                  rows="5"
                  type="text"
                  class="form-control"
+                 placeholder="e.g.         1. Cut up onions
+                 2. Don't cry
+                 3. Add to Salsa Mix"
                  ng-model="recipeData.instructions" required></textarea>
           <textarea ng-if="type == 'edit'"
                  rows="5"
@@ -60,10 +63,10 @@
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-6">
             <button type="submit"
-                    class="btn btn-success btn-large btn-block"
+                    class="btn btn-custom btn-large btn-block"
                     ng-if="type == 'create'">Create Recipe</button>
             <button type="submit"
-                    class="btn btn-success btn-large btn-block"
+                    class="btn btn-custom btn-large btn-block"
                     ng-if="type == 'edit'">Update Recipe</button>
           </div>
         </div>
@@ -74,11 +77,10 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-6">
-      <section class="searchField">
+    <div class="col-lg-offset-3 col-lg-6">
+      <section class="searchField center">
         <form ng-submit="search()">
-          <input type="text" ng-model="searchTerm">
-          <button class="btn btn-default" type="submit">Search</button>
+          <input type="text" ng-model="searchTerm" placeholder="Search">
         </form>
       </section>
     </div>
@@ -88,11 +90,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-offset-2 col-md-8">
-      <table class="table table-striped table-hover table-responsive table-bordered">
+      <table class="top table table-striped table-hover table-responsive table-bordered">
         <tr ng-repeat="food in foodstuffs">
           <td>{{food.name}}</td>
           <td><a href="#" ng-click="modalSearch(food.ndbno)"> Nutrient info</a></td>
-          <td><a href="#" ng-click="addFood(food.ndbno)">Add Food</a></td>
+          <td><a href="#" ng-click="addFood(food.ndbno)">Add food to recipe</a></td>
         </tr>
       </table>
     </div>

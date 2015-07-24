@@ -75,8 +75,8 @@ angular.module('leanmeaneatsApp')
       datasets: [
         {
           label: 'My daily meals',
-          fillColor: 'rgba(66, 139, 202, 0.5)',
-          strokeColor: 'rgba(66, 139, 202, 1)',
+          fillColor: 'rgba(0,0,220,0.5)',
+          strokeColor: 'rgba(0,0,220,1)',
           data: [$scope.curNutrients['Total lipid (fat)']/65, $scope.curNutrients['Fatty acids, total saturated']/20, $scope.curNutrients['Cholesterol']/300, $scope.curNutrients['Sodium, Na']/4200, $scope.curNutrients['Fiber, total dietary']/25, $scope.curNutrients['Sugars, total']/50, $scope.curNutrients['Protein']/50, $scope.curNutrients['Vitamin A, IU']/5000, $scope.curNutrients['Vitamin B-6']/2, $scope.curNutrients['Vitamin B-12']/6, $scope.curNutrients['Vitamin C, total ascorbic acid']/60, $scope.curNutrients['Vitamin D']/400, $scope.curNutrients['Calcium, Ca']/1000, $scope.curNutrients['Iron, Fe']/180, $scope.curNutrients['Potassium, K']/3500]
         }
       ]
@@ -127,7 +127,7 @@ angular.module('leanmeaneatsApp')
       angleLineWidth : 1,
 
       //String - Point label font declaration
-      pointLabelFontFamily : '"Vollkorn"',
+      pointLabelFontFamily : '"Arial"',
 
       //String - Point label font weight
       pointLabelFontStyle : 'normal',
