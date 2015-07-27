@@ -214,10 +214,7 @@ angular.module('leanmeaneatsApp')
   })
   .controller('RecipesShowCtrl', function($scope, $stateParams, $location, Recipe) {
 
-    var radarOptions = {
-
-      //Boolean - If we show the scale above the chart data
-      scaleOverlay : false,
+    $scope.options =  {
 
       //Boolean - If we want to override with a hard coded scale
       scaleOverride : true,
@@ -226,101 +223,68 @@ angular.module('leanmeaneatsApp')
       //Number - The number of steps in a hard coded scale
       scaleSteps : 5,
       //Number - The value jump in the hard coded scale
-      scaleStepWidth : 0.5,
+      scaleStepWidth : 0.2,
       //Number - The centre starting value
       scaleStartValue : 0,
+
+      // Sets the chart to be responsive
+      responsive: true,
 
       //Boolean - Whether to show lines for each scale point
       scaleShowLine : true,
 
-      //String - Colour of the scale line
-      scaleLineColor : '#999',
-
-      //Number - Pixel width of the scale line
-      scaleLineWidth : 1,
+      //Boolean - Whether we show the angle lines out of the radar
+      angleShowLineOut : true,
 
       //Boolean - Whether to show labels on the scale
       scaleShowLabels : true,
 
       //Interpolated JS string - can access value
-      scaleLabel : '<%=Number(value)*100 + \'%\'%>',
-
-      //String - Scale label font declaration for the scale label
-      scaleFontFamily : '\'Arial\'',
-
-      //Number - Scale label font size in pixels
-      scaleFontSize : 12,
-
-      //String - Scale label font weight style
-      scaleFontStyle : 'normal',
-
-      //String - Scale label font colour
-      scaleFontColor : '#666',
-
-      //Boolean - Show a backdrop to the scale label
-      scaleShowLabelBackdrop : true,
-
-      //String - The colour of the label backdrop
-      scaleBackdropColor : 'rgba(255,255,255,0.75)',
-
-      //Number - The backdrop padding above & below the label in pixels
-      scaleBackdropPaddingY : 2,
-
-      //Number - The backdrop padding to the side of the label in pixels
-      scaleBackdropPaddingX : 2,
-
-      //Boolean - Whether we show the angle lines out of the radar
-      angleShowLineOut : true,
+      scaleLabel : '<%=Number(value).toFixed(2)*100 + \'%\'%>',
 
       //String - Colour of the angle line
-      angleLineColor : 'rgba(255,255,255,0.3)',
+      angleLineColor : 'rgba(0,0,0,.1)',
 
       //Number - Pixel width of the angle line
       angleLineWidth : 1,
 
       //String - Point label font declaration
-      pointLabelFontFamily : '\'Arial\'',
+      pointLabelFontFamily : '"Vollkorn"',
 
       //String - Point label font weight
       pointLabelFontStyle : 'normal',
 
       //Number - Point label font size in pixels
-      pointLabelFontSize : 12,
+      pointLabelFontSize : 10,
 
       //String - Point label font colour
-      pointLabelFontColor : '#000000',
+      pointLabelFontColor : '#666',
 
       //Boolean - Whether to show a dot for each point
       pointDot : true,
 
       //Number - Radius of each point dot in pixels
-      pointDotRadius : 2,
+      pointDotRadius : 3,
 
       //Number - Pixel width of point dot stroke
       pointDotStrokeWidth : 1,
+
+      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+      pointHitDetectionRadius : 20,
 
       //Boolean - Whether to show a stroke for datasets
       datasetStroke : true,
 
       //Number - Pixel width of dataset stroke
-      datasetStrokeWidth : 1,
+      datasetStrokeWidth : 2,
 
       //Boolean - Whether to fill the dataset with a colour
       datasetFill : true,
 
-      //Boolean - Whether to animate the chart
-      animation : true,
-
-      //Number - Number of animation steps
-      animationSteps : 60,
-
-      //String - Animation easing effect
-      animationEasing : 'easeOutQuart',
-
-      //Function - Fires when the animation is complete
-      onAnimationComplete : null
-
+      //String - A legend template
+      legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
     };
+
 
     var nutrientArr = ['Total lipid (fat)', 'Fatty acids, total saturated', 'Cholesterol', 'Sodium, Na', 'Fiber, total dietary', 'Sugars, total', 'Protein', 'Vitamin A, IU', 'Vitamin B-6', 'Vitamin B-12', 'Vitamin C, total ascorbic acid', 'Vitamin D', 'Calcium, Ca', 'Iron, Fe','Potassium, K'];
 
@@ -346,7 +310,7 @@ angular.module('leanmeaneatsApp')
     .then(function(){
 
       // Radar Data
-      var radarData = {
+      $scope.radarData = {
         labels : ['Total Fat','Saturated Fat','Cholesterol','Sodium','Fiber','Sugar','Protein','Vitamin A','Vitamin B6','Vitamin B12', 'Vitamin C','Vitamin D','Calcium','Iron','Potassium'],
         datasets : [
           {
@@ -366,11 +330,12 @@ angular.module('leanmeaneatsApp')
     });
 
     $scope.resize = function(amt){
-      if ($scope.myRadarChart.options.scaleStepWidth + amt <= 0){
+
+      if ($scope.chart.options.scaleStepWidth + amt <= 0){
         return;
       }
-      $scope.myRadarChart.options.scaleStepWidth += amt;
-      $scope.myRadarChart.update();
+      $scope.chart.options.scaleStepWidth = $scope.chart.options.scaleStepWidth + amt;
+      $scope.chart.update();
     };
 
     $scope.deleteRecipe = function(id) {
