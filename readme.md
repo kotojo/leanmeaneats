@@ -1,5 +1,5 @@
 # Lean Mean Eats
-### a nutrition application by Bruce Kellerman
+### A nutrition application by Bruce Kellerman
 ---
 
 Lean Mean Eats is a web application used for people to make meals and track the nutritional value of those meals using the USDA's National Nutrient Database API.
@@ -15,3 +15,7 @@ Lean Mean Eats allows people to search the USDA's database for all foods to put 
 
 ---
 
+## Future ideas
+* Implement OAuth for something like Fitbit or myFitnessPal so people could use their already created meals to track on their phone during the day, and import that data into LeanMeanEats.
+* Saved full meal plans to use for the future.
+* Auto suggest meals to balance out what they already ate for the day.
